@@ -16,9 +16,3 @@ comments: yes
 Email: [{{ site.email }}](mailto:{{ site.email }})
 
 Website : [{{ site.name }}]({{ site.url }})
-
-GitHub : [http://github.com/waikeung](http://github.com/waikeung)
-
-Weibo : [http://weibo.com/{{ site.weibo }}](http://weibo.com/{{ site.weibo }})
-
-
