@@ -1,70 +1,47 @@
 ---
-layout: default
+layout: compress
 ---
 
-<section class="post">
-{{ content }}
-</section>
-<section class="meta">
+<!DOCTYPE html>
+<html>
+{% include head.html %}
+<body id="posts" class="inner-post-page">
 
-<br/>
-<br/>
-<span>
-	<a {% if page.previous %} href="{{ site.url }}{{ page.previous.url }}" class="pageNav"{% endif %} {% unless page.previous %} class="pageNavInvalid" {% endunless %} >Previous</a>
-	&nbsp;&nbsp;&nbsp;
-	<a {% if page.next %} href="{{ site.url }}{{ page.next.url }}" class="pageNav"{% endif %} {% unless page.next %} class="pageNavInvalid" {% endunless %} >Next</a>
-</span>
-<hr>
-<span class="author">
-  <a href="http://waikeung.github.com">{{ site.author }}</a>
-</span>
-<span class="time">
-  /
-  <time datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date:"%Y-%m-%d" }}</time>
-</span>
-<br />
-<span class="license">
-  Published under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">(CC) BY-NC-SA</a>
-</span>
-{% if page.categories %}
-<span class="categories">
-  in categories
-  {% for cat in page.categories %}
-  <a href="/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>&nbsp;
-  {% endfor %}
-</span>
-{% endif %}
-{% if page.tags %}
-<span class="tags">
-  tagged with 
-  {% for tag in page.tags %}
-  <a href="/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>&nbsp;
-  {% endfor %}
-</span>
-{% endif %}
-</section>
+    <div class="block-left">
+      <div class="content">
+        <a href="{{ site.url }}" class="logo"><img src="{{ site.url }}/images/{{ site.logo }}"></a>
+        <div class="post-title-section">
+          <div class="section-line">Posts <em>/</em></div>
+          <h1 class="section-title">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>
+          <ul class="tags">
+            {% for tag in page.tags %}
+              <li><a href="{{ site.url }}/tags#{{ tag }}">{{ tag }}</a></li>
+              {% unless forloop.last %}
+              {% endunless %}
+            {% endfor %}
+          </ul>
+          <div class="section-line reverse"><a href="{{ site.url}}/posts">Back to posts</a> <em>/</em></div>
+        </div>
+      </div>
+    </div>
 
-{% include comments.md%}
-<!--
-<script type="text/javascript">
-$(function(){
-  $(document).keydown(function(e) {
-    var url = false;
-        if (e.which == 37 || e.which == 74) {  // Left arrow and J
-            {% if page.previous %}
-        url = '{{ site.url }}{{ page.previous.url }}';
-        {% endif %}
-        }
-        else if (e.which == 39 || e.which == 75) {  // Right arrow and K
-            {% if page.next %}
-        url = '{{ site.url }}{{ page.next.url }}';
-        {% endif %}
-        }
-        if (url) {
-            window.location = url;
-        }
-  });
-})
-</script>
--->
-
+    <div class="block-right">
+      <div class="share-buttons">
+        {% include share.html %}
+      </div>
+      <a href="../posts.html" title="posts" class="posts-menu-icon"></a>
+      <a title="projects" class="projects-menu-icon">
+        <span></span>
+      </a>
+      <div class="inner-post content">
+        <div class="date-highlight">{% if page.date %}{{ page.date | date: '%d %b %Y' }}{% else %}&#x2756;{% endif %}</div>
+        {{ content }}
+        <br>
+        {% include share.html %}
+        {% include page-pagination.html %}
+      </div>
+    </div>
+    {% include scripts.html %}
+    {% include overlay.html %}
+</body>
+</html>
