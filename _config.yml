@@ -3,7 +3,7 @@ permalink: /:year/:month/:day/:title/
 url: http://yyzs.github.io
 author: yyzs
 email: elevendivide@gmail.com
-name: yyzs' Homepage
+name: yyzs's Homepage
 github: yyzs
 pygments: true
 safe: true
